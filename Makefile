@@ -10,8 +10,17 @@ clean:
 public:
 	mkdir -p $@
 
+EXAMPLESILS := $(wildcard examples/*.sil)
+EXAMPLEPDFS := $(addsuffix .pdf,$(basename $(EXAMPLESILS)))
+
+.PHONY: examples
+examples: $(EXAMPLEPDFS)
+
+$(EXAMPLEPDFS): %.pdf: %.sil
+	sile $< -o $@
+
 .PHONY: jekyll
-jekyll: | public
+jekyll: examples | public
 	$(JEKYLL) build --incremental
 	rsync -av _site/ public/
 
