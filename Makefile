@@ -27,3 +27,6 @@ jekyll: examples | public
 
 public/CNAME: | public
 	echo sile-typesetter.org > $@
+
+docker: Dockerfile
+	docker build ./
