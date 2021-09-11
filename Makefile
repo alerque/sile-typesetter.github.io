@@ -1,5 +1,3 @@
-JEKYLL := bundle exec jekyll
-
 .PHONY: site
 site: jekyll
 
@@ -22,7 +20,7 @@ $(EXAMPLEPDFS): %.pdf: %.sil
 
 .PHONY: jekyll
 jekyll: examples | public
-	$(JEKYLL) build --incremental
+	jekyll build --incremental
 	rsync -av _site/ public/
 
 public/CNAME: | public
